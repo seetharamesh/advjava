@@ -8,7 +8,9 @@ public class ArrayManipulation {
 
 	public static void main(String[] args) {
 		
-	int[] nums = {8, 58, 71, 18, 31, 32, 63, 92, 43, 3, 91, 93, 25, 80, 28};
+	//int[] nums = {8, 58, 71, 18, 31, 32, 63, 92, 43, 3, 91, 93, 25, 80, 28};
+		int[] nums = {400};
+		
 	int[] result = new int[nums.length];
 	int[] newarr = new int[nums.length];
 	boolean flag = false;
@@ -17,6 +19,7 @@ public class ArrayManipulation {
 		
 	int elem = nums[i];
 	 newarr = Arrays.copyOfRange(nums, i+1, nums.length);
+	 
 	 Arrays.sort(newarr);
 	 for(int j = 0; j < newarr.length; j++) {
 		 if(newarr[j] > elem) {
