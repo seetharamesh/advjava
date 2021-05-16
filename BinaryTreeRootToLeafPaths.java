@@ -19,7 +19,7 @@ public class BinaryTreeRootToLeafPaths {
 		Stack<Node> stack = new Stack<Node>();
 		while(true) {
 			while(node != null) {
-				System.out.println(node.data);
+				System.out.print(" " + node.data);
 				stack.push(node);
 				node = node.left;	
 			}//end while

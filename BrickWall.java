@@ -38,6 +38,9 @@ public class BrickWall {
 
 	        	}//end of EACH for(list)
 	        }//end of ALL for(list)
+	        
+	        System.out.println("Gaps are: " + map);
+	        
 	        if(maxheap.size() == 0) return wall.size();//Exceptional case [[1],[1],[1]]. Because the inner for loop for each list will not be executed
 	        int maxval = maxheap.peek();
 	        System.out.println(maxval); //peeks the highest value
@@ -57,42 +60,42 @@ public class BrickWall {
 		
 		List list1 = new ArrayList();
 		list1.add(1);
-//		list1.add(2);
-//		list1.add(2);
-//		list1.add(1);
+		list1.add(2);
+		list1.add(2);
+		list1.add(1);
 		
 		List list2 = new ArrayList();
-		//list2.add(3);
+		list2.add(3);
 		list2.add(1);
-		//list2.add(2);
+		list2.add(2);
 		
 		List list3 = new ArrayList();
 		list3.add(1);
-//		list3.add(3);
-//		list3.add(2);
+		list3.add(3);
+		list3.add(2);
 		
-//		List list4 = new ArrayList();
-//		list4.add(2);
-//		list4.add(4);
-//		
-//		List list5 = new ArrayList();
-//		list5.add(3);
-//		list5.add(1);
-//		list5.add(2);
-//		
-//		List list6 = new ArrayList();
-//		list6.add(1);
-//		list6.add(3);
-//		list6.add(1);
-//		list6.add(1);
+		List list4 = new ArrayList();
+		list4.add(2);
+		list4.add(4);
+		
+		List list5 = new ArrayList();
+		list5.add(3);
+		list5.add(1);
+		list5.add(2);
+		
+		List list6 = new ArrayList();
+		list6.add(1);
+		list6.add(3);
+		list6.add(1);
+		list6.add(1);
 		
 		list.add(list1);
 		list.add(list2);
 		list.add(list3);
-//		list.add(list4);
-//		list.add(list5);
-//		list.add(list6);
-//		
+		list.add(list4);
+		list.add(list5);
+		list.add(list6);
+		
 		//System.out.println(list);
 		//System.out.println("size of list: " +list.size());
 		
