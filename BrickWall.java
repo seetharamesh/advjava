@@ -13,9 +13,9 @@ public class BrickWall {
 	public int leastBricks(List<List<Integer>> wall) {	
 		System.out.println(wall);
 		//Step 1: count the number of gaps in each row of the list. Store them in hashmap.
-	
+		int maxnum = 0;
 	    Map<Integer, Integer> map = new HashMap<>();
-	    PriorityQueue<Integer> maxheap = new PriorityQueue<Integer>((a,b) -> b-a); //maxheap
+	   // PriorityQueue<Integer> maxheap = new PriorityQueue<Integer>((a,b) -> b-a); //maxheap
 	        for (List<Integer> list : wall) { //extract each list from wall
 	        	System.out.println(list);
 	        	int prevelem = 0,value = 0;
@@ -23,7 +23,7 @@ public class BrickWall {
 	        		
 	        		int elem = prevelem + list.get(i); //KEY
 	        		//if elem is not in hashmap add the count as 1 
-	        		//if eleme is in hashmap , increment by 1 by getting the previous value
+	        		//if elem is in hashmap , increment by 1 by getting the previous value
 	        		if(map.containsKey(elem)) { 
 	        			value = map.get(elem) + 1;
 	        			map.put(elem, value);
@@ -34,19 +34,25 @@ public class BrickWall {
 	        			map.put(elem, value);
 	        		}
 	        		prevelem = elem;
-	        		maxheap.add(value);
+	        		//maxheap.add(value);
+	            	maxnum = Math.max(value, maxnum);
 
 	        	}//end of EACH for(list)
+	
 	        }//end of ALL for(list)
 	        
 	        System.out.println("Gaps are: " + map);
 	        
-	        if(maxheap.size() == 0) return wall.size();//Exceptional case [[1],[1],[1]]. Because the inner for loop for each list will not be executed
-	        int maxval = maxheap.peek();
-	        System.out.println(maxval); //peeks the highest value
+	       // if(maxheap.size() == 0) return wall.size();//Exceptional case [[1],[1],[1]]. Because the inner for loop for each list will not be executed
+	        if(maxnum == 0) return wall.size();
+//	        int maxval = maxheap.peek();
+//	        System.out.println(maxval +" +++++"); //peeks the highest value
+//	        
+	        System.out.println(maxnum + " *****");
 	        
 	        //Step 2: get the max value from the maxheap...The max value gives us the clue that the line crosses through less bricks --> (width of wall - maximum gaps)
-	        int result = wall.size() - maxval;
+	        //int result = wall.size() - maxval;
+	        int result = wall.size() - maxnum;
 	        return result;	
 	}
 	
