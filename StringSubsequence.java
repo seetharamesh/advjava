@@ -21,7 +21,9 @@ public class StringSubsequence {
         	char[] wcarr = i.toCharArray();
         	int wlen = wcarr.length;
         	
-        valid = matchingSubSeq(scarr,wcarr,slen,wlen);	
+        	
+        //valid = matchingSubSeq(scarr,wcarr,slen,wlen);	//Recursive approach runs out of time in leetcode
+        valid = matchingSubSeqIterative(scarr,wcarr,slen,wlen); //replaced recursive approach with iterative approach because of time issue
         	
         if(valid)	count++;
         	
@@ -43,7 +45,16 @@ public class StringSubsequence {
 				
 	}
 	
-	
+public static boolean matchingSubSeqIterative(char[] scarr, char[] wcarr, int slen, int wlen) {
+		
+		int j = 0;
+		
+		for(int i = 0; i<slen&&j<wlen; i++)
+			if(wcarr[j] == scarr[i])
+				j++;
+		return (j==wlen);
+				
+	}
 	
 	public static void main(String[] args) {
 		//input s = "abcde", words = ["a","bb","acd","ace"]; Output -3
