@@ -26,13 +26,12 @@ public class BinaryTreeCameras {
 		int l = PostOrderBT(node.left);
 		int r = PostOrderBT(node.right);
 		
-		if(l == 1 && r ==1) return 2;
+		if(l == 1 && r ==1) return 2;  
 		if(l == 2 || r ==2) {
 			count++;
 			return 3;
 		}
 		return 1;
-		//System.out.println(node.data);
 	}
 	
 	public static void wrapperPostOrderBT(Node root) {
