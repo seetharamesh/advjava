@@ -29,15 +29,15 @@ public class BinaryTreeCameraAlternate {
 		TYPE right = postOrderBT(node.right);
 		
 			
-		if(left == TYPE.COVERED && right == TYPE.COVERED)
+		if(left == TYPE.COVERED && right == TYPE.COVERED) //after you reach leaf, you won't have any nodes and both left and right will be null 
 			return TYPE.LEAF;
 		
-		if(left == TYPE.LEAF || right == TYPE.LEAF) {
+		if(left == TYPE.LEAF || right == TYPE.LEAF) {//if left or right is a leaf then add camera count because it's a parent node
 			camCount++;
 			return TYPE.PARENT;
 		}
 		
-		if(left == TYPE.PARENT || right == TYPE.PARENT) {
+		if(left == TYPE.PARENT || right == TYPE.PARENT) { //if left or right is a parent then that node is already covered
 			return TYPE.COVERED;
 
 		}		
