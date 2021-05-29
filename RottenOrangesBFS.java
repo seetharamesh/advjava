@@ -23,7 +23,6 @@ public class RottenOrangesBFS {
 		 int collen = grid[0].length;
 		 int mins = 0;
 		 boolean flag = false;
-		 boolean visited[][] = new boolean[rowlen][collen];
 		 
 		 Queue<String>rottenQueue = new LinkedList<>();
 		 
@@ -40,30 +39,31 @@ public class RottenOrangesBFS {
 			 Queue<String>queue = new LinkedList<>();
 		//STEP 2: empty the rotten oranges queue. Add it's neighbors into another queue.
 		 while(!rottenQueue.isEmpty()) {
+			 int size = rottenQueue.size();
 			  String element = rottenQueue.remove();
 			
 				 int i = Integer.parseInt(element.split(",")[0]); 
 				 int j = Integer.parseInt(element.split(",")[1]);
 
-				 flag = isValid(grid,i,j+1, visited);//right
+				 flag = isValid(grid,i,j+1);//right
 					 if(flag && grid[i][j+1] == 1 ) {
 						 grid[i][j+1] = 2;
 						  queue.add(i+","+(j+1));
 					 }
 					 
-					  flag = isValid(grid, i+1, j, visited); //down
+					  flag = isValid(grid, i+1, j); //down
 					  if(flag && grid[i+1][j] == 1 ) {
 						  grid[i+1][j] = 2;
 						  queue.add(i+1 + "," + j);
 					  }
 					  
-					  flag = isValid(grid,i, j-1,visited);//left
+					  flag = isValid(grid,i, j-1);//left
 					  if(flag && grid[i][j-1] == 1 ) {
 						  grid[i][j-1] = 2;
 						  queue.add(i + "," + (j-1));						
 					  }
 					  
-					  flag = isValid(grid,i-1,j,visited);//up
+					  flag = isValid(grid,i-1,j);//up
 					  if(flag && grid[i-1][j]==1 ) {
 						  grid[i-1][j] = 2;
 						  queue.add(i-1 + "," + j);
@@ -94,12 +94,10 @@ public class RottenOrangesBFS {
 	 }
 	 
 	 
-	 public static boolean isValid(int[][] grid, int row, int col, boolean[][] visited) {
+	 public static boolean isValid(int[][] grid, int row, int col) {
 		 
 		 if (row >= 0 && row < grid.length &&
-			        col >= 0 && col < grid[0].length && !visited[row][col]) {
-			 		
-			 		visited[row][col] = true;			 		
+			        col >= 0 && col < grid[0].length) {		 		
 			        return true;
 		 }			         
 			    return false;		 
@@ -107,7 +105,7 @@ public class RottenOrangesBFS {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[][] grid = //{{2,1,1},{1,1,1},{0,1,2}};//output 2
+		int[][] grid = {{2,1,1},{1,1,1},{0,1,2}};//output 2
 		
 		//{{2,0,1,1,1,1,1,1,1,1},{1,0,1,0,0,0,0,0,0,1},{1,0,1,0,1,1,1,1,0,1},{1,0,1,0,1,0,0,1,0,1},{1,0,1,0,1,0,0,1,0,1},{1,0,1,0,1,1,0,1,0,1},{1,0,1,0,0,0,0,1,0,1},{1,0,1,1,1,1,1,1,0,1},{1,0,0,0,0,0,0,0,0,1},{1,1,1,1,1,1,1,1,1,1}};
 			
@@ -120,7 +118,7 @@ public class RottenOrangesBFS {
 			//{{0},{2}};
 			//{{1},{2}};
 		//{{2,1,1},{1,1,0},{0,1,1}}; //output 4
-	{{0}};//output 0
+	//{{0}};//output 0
 		//{{1}};//output -1
 	int result = orangesRotting(grid);
 	System.out.println(result);
