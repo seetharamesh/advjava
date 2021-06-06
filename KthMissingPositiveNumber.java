@@ -5,24 +5,25 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 //https://leetcode.com/problems/kth-missing-positive-number/
+//The key point we have to remember here is the end of the for loop should be until we reach the kth element in the count. It 
+// is NOT 1000.
 public class KthMissingPositiveNumber {
 
 	public static int findKthPositive(int[] arr, int k) {
         int result = 0;
         int count = 0;
         PriorityQueue<Integer> queue = new PriorityQueue<>();
+
         for(int i: arr)
         	queue.add(i);
-        
-        //int end = arr[arr.length-1];
-        
-        for(int i = 1; i <= 1000; i++) {
+                
+        for(int i = 1; count!= k; i++) {
         	if(!queue.contains(i)) {
-        		queue.add(i);
+        		//queue.add(i);
         		count++;
-        		System.out.println(count + " " + i);
+        		//System.out.println(count + " " + i);
         	}
-         		
+         	
         	if(count == k) {
         		result = i;
         		break;
@@ -57,8 +58,16 @@ public class KthMissingPositiveNumber {
 				866,868,869,870,874,878,882,884,885,888,889,890,892,893,897,900,903,905,906,907,908,911,913,916,918,920,
 				921,922,924,925,926,928,929,930,932,933,934,936,937,938,940,942,944,946,949,953,954,956,957,958,961,962,
 				964,965,966,969,972,973,974,976,977,978,979,980,981,982,984,985,986,988,993,996,997,999};
-				//{1,2,3,4}; //{2,3,4,7,11}; //missing array = {1,5,6,8,9,10}. 5th element = 9
-		int k = 724;//2; //5;
+				//{1,3,4,7}; 
+				//{2,3,4,7,11}; //missing array = 
+				//{1,5,6,8,9,10};// 5th element = 9
+			//{2,3,4,7,11};
+			//{1,2,3,4};
+			//{4, 6, 7, 8};
+		int k = 724;
+			//	1; //2; 
+			//	5;
+				//724;
 		int result = findKthPositive(arr, k);
 		System.out.println(result);
 	}
