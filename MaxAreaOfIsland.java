@@ -1,83 +1,61 @@
 package advjava;
-
+//https://leetcode.com/problems/max-area-of-island/submissions/
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class MaxAreaOfIsland {
-	
-	 public int maxAreaOfIsland(int[][] grid) {
+	static int count;
+	static int vrow;
+	static int vcol;
+	 public static int maxAreaOfIsland(int[][] grid) {
 	        int result = 0;
-	      //STEP 1: ADD ALL 1 INDICES IN A QUEUE
 	        int rowlen = grid.length;
 	        int collen = grid[0].length;
-			 Queue<String>queue = new LinkedList<>();
-			 boolean flag = false;
-			 int prevCount = 0, count = 1, maxarea = 0;
+			 int maxarea = 0;
+			 int[][] visited = new int[rowlen][collen];
 			 
 			 for(int i=0; i < rowlen; i++) {
 				 for(int j = 0; j < collen; j++) {
-					 if(grid[i][j] == 1)
-						 queue.add(i + "," + j);		 
+					 if(grid[i][j] == 1) {
+						 count = 0;
+						 //check all 4 directions 
+						 visited[i][j] = grid[i][j];
+						  result = check4D(grid,i,j,visited);
+						  i = vrow;
+						  j = vcol;
+						  if(maxarea < result)
+							  maxarea = result;
+					 }
+						 
 				 }
 			 }
-			 while(!queue.isEmpty()) {
-				 while(true) {
-				 String element = queue.remove();
-					
-				 int i = Integer.parseInt(element.split(",")[0]); 
-				 int j = Integer.parseInt(element.split(",")[1]);
-				 
-				 	flag = isValid(grid,i,j+1);//right
-					 if(flag && grid[i][j+1] == 1 ) {
-						count++;
-					 }
-					 
-					  flag = isValid(grid, i+1, j); //down
-					  if(flag && grid[i+1][j] == 1 ) {
-						  count++;
-					  }
-					  
-					  flag = isValid(grid,i, j-1);//left
-					  if(flag && grid[i][j-1] == 1 ) {
-						  count++;	
-					  }
-					  
-					  flag = isValid(grid,i-1,j);//up
-					  if(flag && grid[i-1][j]==1 ) {
-						  count++;
-					  }
-					  
-					  if(count == 1) break; //means there's water around it
-					  prevCount += count;
-					  
-				 }//end of while true
-				  maxarea = Math.max(prevCount, count);
-				  count = 0;
-		 }//end of while  
-		
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-	        return result;
+			
+	        return maxarea;
 	        
 	    }
 	 
-	 
- public static boolean isValid(int[][] grid, int row, int col) {
+	 public static int check4D(int[][] grid, int row, int col, int[][] visited) {
+		 if(row < 0 || row >= grid.length || col < 0 || col >= grid[0].length || grid[row][col] == 0 || visited[row][col] == -1)
+			 return count;
+		 count++;
+		 vrow = row;//vrow and vcol are used because after we navigate in all 4 directions the row and col will change and we want it to reflect back in the calling method. so declared them as static globally.
+		 vcol = col;
+		 visited[vrow][vcol] = -1;
+		 check4D(grid, row+1, col,visited);//down
+		 check4D(grid, row-1, col,visited); //up
+		 check4D(grid, row, col+1,visited); //right
+		 check4D(grid,row, col-1,visited); //left
 		 
-		 if (row >= 0 && row < grid.length &&
-			        col >= 0 && col < grid[0].length) {		 		
-			        return true;
-		 }			         
-			    return false;		 
+		 return count;
 	 }
  
+ 
 	public static void main(String[] args) {
-		int [][] grid = 
+		int [][] grid = {{1,1,0,0,0},{1,1,0,0,0},{0,0,0,1,1},{0,0,0,1,1}};
+				
+				/* {{0,0,0,0,0,0,0,0}};*/ /*
 				{{0,0,1,0,0,0,0,1,0,0,0,0,0},
 				{0,0,0,0,0,0,0,1,1,1,0,0,0},
 				{0,1,1,0,1,0,0,0,0,0,0,0,0},
@@ -85,8 +63,11 @@ public class MaxAreaOfIsland {
 				{0,1,0,0,1,1,0,0,1,1,1,0,0},
 				{0,0,0,0,0,0,0,0,0,0,1,0,0},
 		        {0,0,0,0,0,0,0,1,1,1,0,0,0},
-		        {0,0,0,0,0,0,0,1,1,0,0,0,0}};
-		}
+		        {0,0,0,0,0,0,0,1,1,0,0,0,0}};*/
+		
+		int result = maxAreaOfIsland(grid);
+		System.out.println(result);
+	}
 
 	}
 
